@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Sh0llR1spzU=",
+  "dgSpecHash": "fwuqkMfYFZU=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Vali\\Desktop\\Ado.Net\\MiniShop3Ado.Net\\ConsoleApp\\ConsoleApp.csproj",
+  "projectFilePath": "C:\\Users\\Vali\\Desktop\\PROJECT\\MiniShop.Net\\ConsoleApp\\ConsoleApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Vali\\.nuget\\packages\\dapper\\2.1.89\\dapper.2.1.89.nupkg.sha512",
     "C:\\Users\\Vali\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\10.0.0\\microsoft.extensions.dependencyinjection.abstractions.10.0.0.nupkg.sha512",

@@ -1,61 +1,61 @@
+
 using Dapper;
 using Domain.Interfaces;
 using Domain.Models;
 using Infrastructure.Data;
 
-
 namespace Infrastructure.Repositories;
 
 public class CategoryRepository : ICategoryRepository
 {
-    public void AddCategory(Categories category)
+    public async Task AddCategoryAsync(Categories category)
     {
         using var connection = Database.Connection();
         connection.Open();
         var query = "insert into categories (name) values (@name)";
-        connection.Execute(query, category);
+        await connection.ExecuteAsync(query, category);
     }
-    public void DeleteCategory(int id)
+
+    public async Task DeleteCategoryAsync(int id)
     {
         using var connection = Database.Connection();
         connection.Open();
         var query = "delete from categories where id = @id";
-        connection.Execute(query, new { id });
+        await connection.ExecuteAsync(query, new { id });
     }
 
-    public void UpdateCategory(Categories category)
+    public async Task UpdateCategoryAsync(Categories category)
     {
         using var connection = Database.Connection();
         connection.Open();
         var query = "update categories set name = @name where id = @id";
-        connection.Execute(query, category);
+        await connection.ExecuteAsync(query, category);
     }
 
-
-    public Categories GetCategory(int id)
+    public async Task<Categories> GetCategoryAsync(int id)
     {
         using var connection = Database.Connection();
-        connection.Open();
+        await connection.OpenAsync();
         var query = "select * from categories where id = @id";
-        var category = connection.QuerySingle<Categories>(query, new { id });
+        var category = await connection.QuerySingleOrDefaultAsync<Categories>(query, new { id });
         return category;
     }
 
-    public List<Categories> GetCategories()
+    public async Task<List<Categories>> GetCategoriesAsync()
     {
         using var connection = Database.Connection();
         connection.Open();
         var query = "select * from categories";
-        var categories = connection.Query<Categories>(query);
+        var categories = await connection.QueryAsync<Categories>(query);
         return categories.ToList();
     }
 
-    public int GetAmountOfCategories()
+    public async Task<int> GetAmountOfCategoriesAsync()
     {
         using var connection = Database.Connection();
         connection.Open();
         var query = "select count(*) from categories";
-        var amount = connection.ExecuteScalar<int>(query);
+        var amount = await connection.ExecuteScalarAsync<int>(query);
         return amount;
     }
 }

@@ -1,4 +1,5 @@
-﻿using Domain.Models;
+﻿
+using Domain.Models;
 using Infrastructure.Repositories;
 
 var categoryRepo = new CategoryRepository();
@@ -34,7 +35,7 @@ while (true)
     switch (a)
     {
         case "1":
-            var allCategories = categoryRepo.GetCategories();
+            var allCategories = await categoryRepo.GetCategoriesAsync();
 
             foreach (var item in allCategories)
             {
@@ -46,7 +47,7 @@ while (true)
             System.Console.Write("Enter id of category: ");
             var categoryIdToShow = Convert.ToInt32(Console.ReadLine());
 
-            var categoryToShow = categoryRepo.GetCategory(categoryIdToShow);
+            var categoryToShow = await categoryRepo.GetCategoryAsync(categoryIdToShow);
             System.Console.WriteLine(categoryToShow.Id + " " + categoryToShow.Name);
             break;
 
@@ -59,7 +60,7 @@ while (true)
                 Name = categoryName
             };
 
-            categoryRepo.AddCategory(newCategory);
+            await categoryRepo.AddCategoryAsync(newCategory);
             break;
 
         case "4":
@@ -74,18 +75,18 @@ while (true)
                 Name = newCategoryName
             };
 
-            categoryRepo.UpdateCategory(categoryToUpdate);
+            await categoryRepo.UpdateCategoryAsync(categoryToUpdate);
             break;
 
         case "5":
             System.Console.Write("Enter id: ");
             var categoryIdToDelete = Convert.ToInt32(Console.ReadLine());
 
-            categoryRepo.DeleteCategory(categoryIdToDelete);
+            await categoryRepo.DeleteCategoryAsync(categoryIdToDelete);
             break;
 
         case "6":
-            var allProducts = productRepo.GetProducts();
+            var allProducts = await productRepo.GetProductsAsync();
 
             foreach (var item in allProducts)
             {
@@ -97,7 +98,7 @@ while (true)
             System.Console.Write("Enter id of product: ");
             var productIdToShow = Convert.ToInt32(Console.ReadLine());
 
-            var productToShow = productRepo.GetProducts(productIdToShow);
+            var productToShow = await productRepo.GetProductsAsync(productIdToShow);
             System.Console.WriteLine(productToShow.Id + " " + productToShow.Name + " " + productToShow.Price);
             break;
 
@@ -116,7 +117,7 @@ while (true)
                 CategoryId = productCategoryId
             };
 
-            productRepo.AddProducts(newProduct);
+            await productRepo.AddProductsAsync(newProduct);
             break;
 
         case "9":
@@ -137,21 +138,21 @@ while (true)
                 CategoryId = newProductCategoryId
             };
 
-            productRepo.UpdateProducts(productToUpdate);
+            await productRepo.UpdateProductsAsync(productToUpdate);
             break;
 
         case "10":
             System.Console.Write("Enter id: ");
             var productIdToDelete = Convert.ToInt32(Console.ReadLine());
 
-            productRepo.DeleteProducts(productIdToDelete);
+            await productRepo.DeleteProductsAsync(productIdToDelete);
             break;
 
         case "11":
             System.Console.Write("Enter category id: ");
             var idForProducts = Convert.ToInt32(Console.ReadLine());
 
-            var productsByCategory = productRepo.GetProductsByCategory(idForProducts);
+            var productsByCategory = await productRepo.GetProductsByCategoryAsync(idForProducts);
 
             foreach (var item in productsByCategory)
             {
@@ -160,39 +161,39 @@ while (true)
             break;
 
         case "12":
-            System.Console.WriteLine("Amount of products: " + productRepo.GetAmountOfProducts());
+            System.Console.WriteLine("Amount of products: " + await productRepo.GetAmountOfProductsAsync());
             break;
 
         case "13":
-            System.Console.WriteLine("Amount of categories: " + categoryRepo.GetAmountOfCategories());
+            System.Console.WriteLine("Amount of categories: " + await categoryRepo.GetAmountOfCategoriesAsync());
             break;
 
         case "14":
             System.Console.Write("Enter category id: ");
             var idForAmount = Convert.ToInt32(Console.ReadLine());
-            System.Console.WriteLine("Amount: " + productRepo.GetAmountOfProductsByCategory(idForAmount));
+            System.Console.WriteLine("Amount: " + await productRepo.GetAmountOfProductsByCategoryAsync(idForAmount));
             break;
 
         case "15":
             System.Console.Write("Enter category id: ");
             var idForMin = Convert.ToInt32(Console.ReadLine());
-            System.Console.WriteLine("Min price: " + productRepo.GetMinPriceOfProductByCategory(idForMin));
+            System.Console.WriteLine("Min price: " + await productRepo.GetMinPriceOfProductByCategoryAsync(idForMin));
             break;
 
         case "16":
             System.Console.Write("Enter category id: ");
             var idForMax = Convert.ToInt32(Console.ReadLine());
-            System.Console.WriteLine("Max price: " + productRepo.GetMaxPriceOfProductByCategory(idForMax));
+            System.Console.WriteLine("Max price: " + await productRepo.GetMaxPriceOfProductByCategoryAsync(idForMax));
             break;
 
         case "17":
             System.Console.Write("Enter category id: ");
             var idForAvg = Convert.ToInt32(Console.ReadLine());
-            System.Console.WriteLine("Average price: " + productRepo.GetAveragePriceOfProductByCategory(idForAvg));
+            System.Console.WriteLine("Average price: " + await productRepo.GetAveragePriceOfProductByCategoryAsync(idForAvg));
             break;
 
         case "18":
-            System.Console.WriteLine("Total price: " + productRepo.GetTotalPriceOfProducts());
+            System.Console.WriteLine("Total price: " + await productRepo.GetTotalPriceOfProductsAsync());
             break;
 
         case "0":

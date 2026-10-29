@@ -4,10 +4,10 @@ namespace Domain.Interfaces;
 
 public interface ICategoryRepository
 {
-    void AddCategory(Categories category);
-    void UpdateCategory(Categories category);
-    void DeleteCategory(int id);
-    Categories GetCategory(int id);
-    List<Categories> GetCategories();
-    int GetAmountOfCategories();
+    Task AddCategoryAsync(Categories category);
+    Task UpdateCategoryAsync(Categories category);
+    Task DeleteCategoryAsync(int id);
+    Task<Categories> GetCategoryAsync(int id);
+    Task<List<Categories>> GetCategoriesAsync();
+    Task<int> GetAmountOfCategoriesAsync();
 }
